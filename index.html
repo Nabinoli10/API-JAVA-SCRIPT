@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bringing Data From API</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: lightblue
+        }
+        #content {
+            border: 2px solid blue;
+            padding: 10px;
+            margin: 10px 0;
+            background-color: lightgray;
+        }
+        #chucks {
+            border: 2px solid blue;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        #nextJoke {
+            background-color: green;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="content">
+        <h1>LETS LAUGH</h1>
+        <label>What's chuck doing today?</label>
+        <p id="chucks"></p>
+        <button id="nextJoke" onclick="getJoke()">Next Joke</button>
+    </div>
+    <script>
+        function getJoke() {
+            fetch('https://api.chucknorris.io/jokes/random?category=food')
+            .then(response=>response.json())
+            .then(json => document.getElementById("chucks").innerHTML=json.value)
+            .catch(error => console.log('unable to reach URL'+error));
+        }
+        getJoke();
+    </script>
+</body>
+</html>
